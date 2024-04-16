@@ -1,0 +1,72 @@
+  if (firstName.isEmpty) {
+    _showInputErrorDialog('First Name');
+    return;
+  }
+  if (lastName.isEmpty) {
+    _showInputErrorDialog('Last Name');
+    return;
+  }
+  if (country.isEmpty) {
+    _showInputErrorDialog('Country');
+    return;
+  }
+  if (city.isEmpty) {
+    _showInputErrorDialog('City');
+    return;
+  }
+  if (idNumber.isEmpty) {
+    _showInputErrorDialog('ID Number');
+    return;
+  }
+  if (nationalId.isEmpty) {
+    _showInputErrorDialog('National ID');
+    return;
+  }
+  if (password.isEmpty) {
+    _showInputErrorDialog('Password');
+    return;
+  }
+
+    if (password.isEmpty) {
+    _showInputErrorDialog('job');
+    return;
+  }
+
+
+
+  // ======================================================================================================
+
+    ServerUserAPI.insertUser(firstName, lastName, country, city, idNumber, nationalId, password, userType, job) // تم تعديل دالة الإدراج لتأخذ المعامل الجديد
+        .then((result) {
+      if (result == 'User inserted successfully') {
+        print('User inserted successfully');
+        // Navigate to success screen or perform other actions
+      } else {
+        print('Failed to insert user: $result');
+        // Handle error, e.g., display an error message to the user
+      }
+    });
+  }
+
+
+  // ================================================================================================
+
+  void _showInputErrorDialog(String fieldName) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Error'),
+        content: Text('Please enter your $fieldName'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      );
+    },
+  );
+}
